@@ -14,6 +14,7 @@ import {Database} from './database';
 import {TaskListContainerComponent} from './tasks/task-list-container/task-list-container.component';
 import {ProjectService} from './project/project.service';
 import {ProjectComponent} from './project/project/project.component';
+import { ProjectContainerComponent } from './project/project-container/project-container.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {ProjectComponent} from './project/project/project.component';
     CheckboxComponent,
     ToggleComponent,
     TaskListContainerComponent,
-    ProjectComponent
+    ProjectComponent,
+    ProjectContainerComponent
   ],
   imports: [
     BrowserModule,
