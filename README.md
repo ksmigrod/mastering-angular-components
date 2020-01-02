@@ -36,8 +36,9 @@ Aby `<input type="text" >` reagował na klawisz enter dodałem `(keyup.enter)`
 <input type="text"
        placeholder="Enter new task title..."
        (keyup.enter)="enterTask(titleInput)"
-       #titleInput>
-<button (click)="enterTask(titleInput)">
+       #titleInput
+       class="title-input">
+<button (click)="enterTask(titleInput)" class="button">
   Add Task
 </button>
 ```
