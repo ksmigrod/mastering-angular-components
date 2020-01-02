@@ -1,31 +1,30 @@
-import {Component, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {TaskService} from '../task.service';
+import {Task} from 'src/app/model';
 
 @Component({
   selector: 'mac-task-list',
   templateUrl: './task-list.component.html',
   encapsulation: ViewEncapsulation.None
 })
-export class TaskListComponent {
-  tasks: {id: number, title: string, done: boolean}[] = [
-    {id: 1, title: 'Task 1', done: false},
-    {id: 2, title: 'Task 2', done: true}
-  ];
+export class TaskListComponent implements OnInit {
+  tasks: Task[];
 
-  addTask(title: string): void {
-    this.tasks.push({
-      id: this.generateNextId(this.tasks),
-      title,
-      done: false
-    });
+  constructor(private taskService: TaskService) {
   }
 
-  private generateNextId(tasks: {id: number}[]): number {
-    return tasks
-      .map(t => t.id)
-      .reduce(
-        (previousValue, currentValue) =>
-          previousValue > currentValue ? previousValue : currentValue,
-        Number.MIN_SAFE_INTEGER);
+  ngOnInit(): void {
+    this.tasks = this.taskService.getTasks();
+  }
+
+  addTask(title: string): void {
+    this.taskService.addTask({title, done: false});
+    this.tasks = this.taskService.getTasks();
+  }
+
+  updateTask(task: Task): void {
+    this.taskService.updateTask(task);
+    this.tasks = this.taskService.getTasks();
   }
 }
 

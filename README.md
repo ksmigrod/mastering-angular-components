@@ -85,3 +85,8 @@ użyłem
 ```
 
 To pozwoliło na kompilację bez ostrzeżeń.
+
+### Usługi
+
+Pamiętać o składni `{ ...staryObiekt, nowaWlasnosc }` do budowania nowych obiektów
+ze zaktualizowanymi własnościami.
