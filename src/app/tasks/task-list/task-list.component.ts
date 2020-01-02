@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {TaskService} from '../task.service';
 import {Task, TaskListFilterType} from 'src/app/model';
 import {BehaviorSubject, combineLatest, Observable} from 'rxjs';
@@ -9,39 +9,26 @@ import {map} from 'rxjs/operators';
   templateUrl: './task-list.component.html',
   encapsulation: ViewEncapsulation.None
 })
-export class TaskListComponent implements OnInit {
-  filteredTasks: Observable<Task[]>;
-  taskFilterTypes: TaskListFilterType[] = ['all', 'open', 'done'];
-  activeTaskFilterType = new BehaviorSubject<TaskListFilterType>('all');
+export class TaskListComponent {
+  @Input() tasks: Task[];
+  @Input() taskFilterTypes: TaskListFilterType[];
+  @Input() activeTaskFilterType: TaskListFilterType;
 
-  constructor(private taskService: TaskService) {
+  @Output() outAddTask = new EventEmitter<string>();
+  @Output() outUpdateTask = new EventEmitter<Task>();
+  @Output() outActivateFilterType = new EventEmitter<TaskListFilterType>();
+
+
+  activateFilterType($event: string) {
+    this.outActivateFilterType.emit($event as TaskListFilterType);
   }
 
-  ngOnInit(): void {
-    this.filteredTasks = combineLatest([this.taskService.getTasks(), this.activeTaskFilterType]).pipe(
-      map(([tasks, activeTaskFilterType]) => tasks.filter(task => {
-        switch (activeTaskFilterType) {
-          case 'all':
-            return true;
-          case 'done':
-            return task.done;
-          case 'open':
-            return !task.done;
-        }
-      }))
-    );
+  addTask($event: string) {
+    this.outAddTask.emit($event);
   }
 
-  addTask(title: string): void {
-    this.taskService.addTask({title, done: false});
-  }
-
-  updateTask(task: Task): void {
-    this.taskService.updateTask(task);
-  }
-
-  activateFilterType(type: string): void {
-    this.activeTaskFilterType.next(type as TaskListFilterType);
+  updateTask($event: Task) {
+    this.outUpdateTask.emit($event);
   }
 }
 

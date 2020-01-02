@@ -1,0 +1,6 @@
+<mac-task-list [tasks]="tasks | async"
+               [taskFilterTypes]="taskFilterTypes"
+               [activeTaskFilterType]="activeTaskFilterType | async"
+               (outAddTask)="addTask($event)"
+               (outUpdateTask)="updateTask($event)"
+               (outActivateFilterType)="activateFilterType($event)"></mac-task-list>
