@@ -1,27 +1,14 @@
-# MasteringAngularComponents
+# Mastering Angular Components
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.21.
+Przykłady z książki [Mastering Angular Components](https://www.packtpub.com/web-development/mastering-angular-components-second-edition)
+i notatki z przerabiania tej książki.
 
-## Development server
+[Repo z kodami źródłowymi do tej książki](https://github.com/PacktPublishing/Mastering-Angular-Components-Second-Edition)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Tworzenie projektu
 
-## Code scaffolding
+Zamiast instalować @angular/cli globalnie użyłem:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+```
+npx @angular/cli new --style=css --routing=false --prefix=mac mastering-angular-component
+```
