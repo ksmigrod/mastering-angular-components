@@ -91,3 +91,14 @@ To pozwoliło na kompilację bez ostrzeżeń.
 
 Pamiętać o składni `{ ...staryObiekt, nowaWlasnosc }` do budowania nowych obiektów
 ze zaktualizowanymi własnościami.
+
+## Oczyszczanie komponentów
+
+### Mock HTTP
+
+Zainstalowałem bazę in-memory:
+
+```
+npm install --save angular-in-memory-web-api
+```
+

@@ -1,6 +1,8 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {TaskService} from '../task.service';
 import {Task, TaskListFilterType} from 'src/app/model';
+import {BehaviorSubject, combineLatest, Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'mac-task-list',
@@ -8,40 +10,17 @@ import {Task, TaskListFilterType} from 'src/app/model';
   encapsulation: ViewEncapsulation.None
 })
 export class TaskListComponent implements OnInit {
-  tasks: Task[];
-  filteredTasks: Task[];
+  filteredTasks: Observable<Task[]>;
   taskFilterTypes: TaskListFilterType[] = ['all', 'open', 'done'];
-  activeTaskFilterType: TaskListFilterType = 'all';
+  activeTaskFilterType = new BehaviorSubject<TaskListFilterType>('all');
 
   constructor(private taskService: TaskService) {
   }
 
   ngOnInit(): void {
-    this.tasks = this.taskService.getTasks();
-    this.filterTasks();
-  }
-
-  addTask(title: string): void {
-    this.taskService.addTask({title, done: false});
-    this.tasks = this.taskService.getTasks();
-    this.filterTasks();
-  }
-
-  updateTask(task: Task): void {
-    this.taskService.updateTask(task);
-    this.tasks = this.taskService.getTasks();
-    this.filterTasks();
-  }
-
-  activateFilterType(type: string): void {
-    this.activeTaskFilterType = type as TaskListFilterType;
-    this.filterTasks();
-  }
-
-  private filterTasks() {
-    this.filteredTasks =
-      this.tasks.filter(task => {
-        switch (this.activeTaskFilterType) {
+    this.filteredTasks = combineLatest([this.taskService.getTasks(), this.activeTaskFilterType]).pipe(
+      map(([tasks, activeTaskFilterType]) => tasks.filter(task => {
+        switch (activeTaskFilterType) {
           case 'all':
             return true;
           case 'done':
@@ -49,7 +28,20 @@ export class TaskListComponent implements OnInit {
           case 'open':
             return !task.done;
         }
-      });
+      }))
+    );
+  }
+
+  addTask(title: string): void {
+    this.taskService.addTask({title, done: false});
+  }
+
+  updateTask(task: Task): void {
+    this.taskService.updateTask(task);
+  }
+
+  activateFilterType(type: string): void {
+    this.activeTaskFilterType.next(type as TaskListFilterType);
   }
 }
 

@@ -1,38 +1,32 @@
 import { Injectable } from '@angular/core';
 import { Task } from '../model';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 export class TaskService {
-  private tasks: Task[] = [
-    {id: 1, title: 'Task 1', done: false},
-    {id: 2, title: 'Task 2', done: false},
-    {id: 3, title: 'Task 3', done: true},
-    {id: 4, title: 'Task 4', done: false}
-  ];
+  private tasks = new BehaviorSubject<Task[]>([]);
 
-  private static generateNextId(tasks: Task[]): number {
-    return tasks
-      .map(t => t.id)
-      .reduce(
-        (previousValue, currentValue) =>
-          previousValue > currentValue ? previousValue : currentValue,
-        Number.MIN_SAFE_INTEGER);
+  constructor(private http: HttpClient) {
+    this.loadTasks();
   }
 
-  getTasks(): Task[] {
-    return this.tasks.slice();
+  getTasks(): Observable<Task[]> {
+    return this.tasks.asObservable();
   }
 
   addTask(task: Task): void {
-    this.tasks.push({
-      ...task,
-      id: TaskService.generateNextId(this.tasks)
-    });
+    this.http.post<Task>('/api/tasks', task)
+      .subscribe(() => this.loadTasks());
   }
 
   updateTask(task: Task): void {
-    const index = this.tasks
-      .findIndex((t) => t.id === task.id);
-    this.tasks[index] = task;
+    this.http.put<Task>(`/api/tasks/${task.id}`, task)
+      .subscribe(() => this.loadTasks());
+  }
+
+  private loadTasks() {
+    this.http.get<Task[]>('/api/tasks')
+      .subscribe(tasks => this.tasks.next(tasks));
   }
 }
