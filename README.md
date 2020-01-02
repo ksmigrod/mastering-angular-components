@@ -41,3 +41,47 @@ Aby `<input type="text" >` reagował na klawisz enter dodałem `(keyup.enter)`
   Add Task
 </button>
 ```
+
+### Komponenty własne
+
+Oryginalny kod powodował ostrzeżenia w nowszym Angularze (lub TypeScript).
+
+Zamiast:
+
+```angular2html
+<label class="label">
+  <input class="input" type="checkbox"
+         [checked]="checked"
+         (change)="check($event.target.checked)">
+  <span class="text">{{label}}</span>
+</label>
+```
+
+użyłem
+
+```angular2html
+<label class="label">
+  <input class="input" type="checkbox"
+         [checked]="checked"
+         (change)="check($event)">
+  <span class="text">{{label}}</span>
+</label>
+```
+
+A w kodzie zamiast:
+
+```typescript
+  check(checked: boolean) {
+    this.outCheck.emit(checked);
+  }
+```
+
+użyłem
+
+```typescript
+  check({target = {} as HTMLInputElement }) {
+    this.outCheck.emit(target.checked);
+  }
+```
+
+To pozwoliło na kompilację bez ostrzeżeń.
