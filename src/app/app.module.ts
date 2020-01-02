@@ -12,6 +12,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
 import {Database} from './database';
 import { TaskListContainerComponent } from './tasks/task-list-container/task-list-container.component';
+import {ProjectService} from './project/project.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { TaskListContainerComponent } from './tasks/task-list-container/task-lis
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(Database, {delay: 20})
   ],
-  providers: [TaskService],
+  providers: [ProjectService, TaskService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
