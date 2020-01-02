@@ -18,3 +18,26 @@ Pamiętać o skopiowaniu [src/styles.css](https://raw.githubusercontent.com/Pack
 ### Dodawanie komponentów
 
 `ng generate component` używane w książce tworzy pliki css. Nie są one używane więc warto je kasować.
+
+Zmieniła się składnia opcji dla `ng generate component` lepiej użyć:
+
+Zamiast `--spec false` należy użyć `--skipTests`.
+ 
+Zamiast `-ve none` należy użyć `--viewEncapsulation None`.
+
+ 
+### Komponent do dodawania zadań
+
+Rozdział 2, „Adding Tasks”.
+
+Aby `<input type="text" >` reagował na klawisz enter dodałem `(keyup.enter)`
+ 
+```angular2html
+<input type="text"
+       placeholder="Enter new task title..."
+       (keyup.enter)="enterTask(titleInput)"
+       #titleInput>
+<button (click)="enterTask(titleInput)">
+  Add Task
+</button>
+```
