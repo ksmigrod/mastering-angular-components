@@ -16,7 +16,7 @@ export class TaskService {
     return this.tasks.asObservable();
   }
 
-  getProjectTasks(projectId: number) {
+  getProjectTasks(projectId: number): Observable<Task[]> {
     return this.tasks.asObservable().pipe(
       map(tasks => tasks.filter(task => task.projectId === projectId))
     );
