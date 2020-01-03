@@ -22,6 +22,7 @@ import { NavigationComponent } from './ui/navigation/navigation/navigation.compo
 import { EditorComponent } from './ui/editor/editor/editor.component';
 import { ProfilePictureComponent } from './user/profile-picture/profile-picture/profile-picture.component';
 import { UserAreaComponent } from './user/user-area/user-area/user-area.component';
+import { FromNowPipe } from './pipes/from-now.pipe';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { UserAreaComponent } from './user/user-area/user-area/user-area.componen
     NavigationComponent,
     EditorComponent,
     ProfilePictureComponent,
-    UserAreaComponent
+    UserAreaComponent,
+    FromNowPipe
   ],
   imports: [
     BrowserModule,
