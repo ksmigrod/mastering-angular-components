@@ -26,6 +26,11 @@ export class ProjectService {
       .subscribe(projects => this.projects.next(projects));
   }
 
+  updateProject(project: Project): void {
+    this.http.put(`/api/projects/${project.id}`, project)
+      .subscribe(() => this.loadProjects());
+  }
+
   getProjects(): Observable<Project[]> {
     return this.projects.asObservable();
   }

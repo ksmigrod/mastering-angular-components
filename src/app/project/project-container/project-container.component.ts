@@ -26,4 +26,8 @@ export class ProjectContainerComponent implements OnInit {
   activateTab($event: Tab) {
     this.activeTab = $event;
   }
+
+  updateProject(project: Project) {
+    this.projectService.updateProject(project);
+  }
 }
