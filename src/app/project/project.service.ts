@@ -26,6 +26,10 @@ export class ProjectService {
       .subscribe(projects => this.projects.next(projects));
   }
 
+  getProjects(): Observable<Project[]> {
+    return this.projects.asObservable();
+  }
+
   selectProject(projectId: number): void {
     this.selectedProjectId.next(projectId);
   }
