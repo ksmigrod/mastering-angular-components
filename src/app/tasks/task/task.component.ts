@@ -18,4 +18,8 @@ export class TaskComponent {
   updateTask(done: boolean): void {
     this.outUpdateTask.emit({...this.task, done});
   }
+
+  updateTitle(title: string) {
+    this.outUpdateTask.emit({...this.task, title});
+  }
 }
