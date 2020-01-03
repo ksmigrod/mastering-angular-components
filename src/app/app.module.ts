@@ -15,6 +15,7 @@ import {TaskListContainerComponent} from './tasks/task-list-container/task-list-
 import {ProjectService} from './project/project.service';
 import {ProjectComponent} from './project/project/project.component';
 import { ProjectContainerComponent } from './project/project-container/project-container.component';
+import { TabsComponent } from './ui/tabs/tabs/tabs.component';
 
 @NgModule({
   declarations: [
@@ -26,12 +27,13 @@ import { ProjectContainerComponent } from './project/project-container/project-c
     ToggleComponent,
     TaskListContainerComponent,
     ProjectComponent,
-    ProjectContainerComponent
+    ProjectContainerComponent,
+    TabsComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(Database, {delay: 20})
+    HttpClientInMemoryWebApiModule.forRoot(Database, {delay: 0})
   ],
   providers: [ProjectService, TaskService],
   bootstrap: [AppComponent]

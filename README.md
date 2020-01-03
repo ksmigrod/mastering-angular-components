@@ -102,3 +102,10 @@ Zainstalowałem bazę in-memory:
 npm install --save angular-in-memory-web-api
 ```
 
+### Obsługa tabów 
+
+Obsługa tabów w książce opiera się na asynchronicznym odczytywaniu `selectedProject`.
+Działa ona tylko wtedy gdy in-memory-database ma opóźnienia ustwione na 0.
+Jeśli opóźnienia są ustawione na więcej niż 0, to w konsoli pojawiają się błędy
+spowodowane przyjmowaniem przez `selectedProject` wartości undefined w trakcie
+budowania DOMu.

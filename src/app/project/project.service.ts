@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, combineLatest, Observable} from 'rxjs';
 import {Project} from '../model';
-import {map} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 
 @Injectable()
 export class ProjectService {
@@ -20,6 +20,9 @@ export class ProjectService {
 
   private loadProjects(): void {
     this.http.get<Project[]>('/api/projects')
+      .pipe(
+        tap(t => console.log('loadedProjects', t))
+      )
       .subscribe(projects => this.projects.next(projects));
   }
 
