@@ -20,6 +20,8 @@ import { NavigationItemComponent } from './ui/navigation-item/navigation-item/na
 import { NavigationSectionComponent } from './ui/navigation-section/navigation-section/navigation-section.component';
 import { NavigationComponent } from './ui/navigation/navigation/navigation.component';
 import { EditorComponent } from './ui/editor/editor/editor.component';
+import { ProfilePictureComponent } from './user/profile-picture/profile-picture/profile-picture.component';
+import { UserAreaComponent } from './user/user-area/user-area/user-area.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { EditorComponent } from './ui/editor/editor/editor.component';
     NavigationItemComponent,
     NavigationSectionComponent,
     NavigationComponent,
-    EditorComponent
+    EditorComponent,
+    ProfilePictureComponent,
+    UserAreaComponent
   ],
   imports: [
     BrowserModule,
