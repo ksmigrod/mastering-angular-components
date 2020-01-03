@@ -17,3 +17,9 @@ export interface Tab {
   readonly id: string;
   readonly title: string;
 }
+
+export interface User {
+  readonly id?: number;
+  readonly name: string;
+  readonly pictureUrl: string;
+}

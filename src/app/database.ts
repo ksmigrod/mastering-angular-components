@@ -1,5 +1,5 @@
 import {InMemoryDbService} from 'angular-in-memory-web-api';
-import {Project, Task} from './model';
+import {Project, Task, User} from './model';
 
 export class Database implements InMemoryDbService {
 
@@ -16,6 +16,10 @@ export class Database implements InMemoryDbService {
       {id: 4, projectId: 1, title: 'Task 4', done: false}
     ];
 
-    return {projects, tasks};
+    const users: User[] = [
+      {id: 1, name: 'You', pictureUrl: '/assets/user.svg'}
+    ];
+
+    return {projects, tasks, users};
   }
 }
